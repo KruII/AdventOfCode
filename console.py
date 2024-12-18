@@ -1,6 +1,7 @@
 import os
 from dotenv import load_dotenv
 from Year2024.functions import DAY_FUNCTIONS  # Import funkcji z jednego pliku
+from utils.language_loader import load_language
 
 # Wczytanie zmiennych z pliku .env
 load_dotenv()
@@ -25,11 +26,38 @@ def get_session_token():
         print("TOKEN zapisany do .env")
     return token
 
+def get_language():
+    language = os.getenv("LANGUAGE")
+    if not language:
+        language = "en"
+        with open(".env", "a") as env_file:
+            env_file.write(f"\nLANGUAGE={language}")
+    return language
+
+def get_auto_send():
+    auto_send = os.getenv("AUTO_SEND")
+    if not auto_send:
+        auto_send = "TRUE"
+        with open(".env", "a") as env_file:
+            env_file.write(f"\nAUTO_SEND={auto_send}")
+    return auto_send
+
+def decrypt(message):
+    message = 
+
 def main():
     token = get_session_token()  # Pobranie ciastkowej sesji
+    language = get_language()
+    auto_send = get_auto_send()
+    
+    try:
+        lang = load_language(language)
+    except FileNotFoundError as e:
+        print(e)
+        return
     
     while True:
-        print("\nWybierz dzień (1-25) lub 0 aby zakończyć:")
+        print("\n"+(lang["select_day"]))
         try:
             day = int(input("Podaj numer dnia: "))
             if day == 0:
@@ -37,8 +65,8 @@ def main():
                 break
             elif 1 <= day <= 25:
                 if day in DAY_FUNCTIONS:
-                    input_url = f"https://adventofcode.com/2024/day/{day}/input"
-                    print(DAY_FUNCTIONS[day](input_url, token))  # Wywołanie funkcji dla wybranego dnia
+                    result = DAY_FUNCTIONS[day](token, auto_send)  # Wywołanie funkcji dla wybranego dnia
+                    print(decrypt(result))
                 else:
                     print(f"Funkcja dla dnia {day} nie jest zdefiniowana.")
             else:

@@ -7,6 +7,7 @@
     "enter_number": "Podaj numer:",
     "invalid_choice": "Nieznany wybór. Zamykam program.",
     "running_console": "Uruchamianie wersji konsolowej...",
-    "running_gui": "Uruchamianie wersji graficznej..."
-  }
-  
+    "running_gui": "Uruchamianie wersji graficznej...",
+
+    "select_day": "Wybierz dzień (1-25) lub 0 aby zakończyć:"
+}

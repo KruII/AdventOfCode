@@ -7,6 +7,8 @@
     "enter_number": "Enter the number:",
     "invalid_choice": "Invalid choice. Exiting the program.",
     "running_console": "Running console version...",
-    "running_gui": "Running graphical version..."
+    "running_gui": "Running graphical version...",
+
+    "select_day": ""
   }
   

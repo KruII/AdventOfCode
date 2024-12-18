@@ -1,39 +1,60 @@
-import requests
+from collections import Counter
+from utils.requester import Requester
 
-def calculate_distance_from_url(url, token):
+def calculate_distance_from_url(token, auto_send):
     """
     Pobiera dane z URL z autoryzacją TOKEN, oblicza całkowitą odległość
+    i similarity score, a następnie wysyła je POST-em.
     """
     def calculate_total_distance(left_list, right_list):
-        # Sort both lists in ascending order
-        left_list.sort()
-        right_list.sort()
+        """Oblicza sumę odległości dla posortowanych list."""
+        return sum(abs(left - right) for left, right in zip(left_list, right_list))
 
-        # Calculate the total distance
-        total_distance = sum(abs(left - right) for left, right in zip(left_list, right_list))
-        return total_distance
+    def calculate_similarity_score(left_list, right_list):
+        """Oblicza similarity score."""
+        right_count = Counter(right_list)
+        return sum(left * right_count[left] for left in left_list)
 
-    def read_input(url, token):
-        # Pobranie danych z URL z TOKEN w nagłówku Cookie
-        headers = {"Cookie": f"session={token}"}
-        response = requests.get(url, headers=headers)
-        response.raise_for_status()  # Wyrzuca błąd dla statusu != 200
-        
-        left_list = []
-        right_list = []
-        for line in response.text.strip().split("\n"):
+    def parse_input_data(data):
+        """Parsuje dane wejściowe i zwraca listy."""
+        left_list, right_list = [], []
+        for line in data.strip().split("\n"):
             left, right = map(int, line.split())
             left_list.append(left)
             right_list.append(right)
-        
         return left_list, right_list
 
     # Główna logika
+    url = "https://adventofcode.com/2024/day/1"
+    requester = Requester(url, token)
+
     try:
-        left_list, right_list = read_input(url, token)
-        result = calculate_total_distance(left_list, right_list)
-        print("Total Distance:", result)
-        return result
+        # Pobranie i przetworzenie danych
+        input_data = requester.fetch_input_data()
+        left_list, right_list = parse_input_data(input_data)
+
+        # Sortowanie list
+        left_list.sort()
+        right_list.sort()
+
+        # Obliczenia
+        total_distance = calculate_total_distance(left_list, right_list)
+        similarity_score = calculate_similarity_score(left_list, right_list)
+        
+        star=requester.check_day_success()
+        
+        if auto_send:
+            star_results = ""
+            
+            if (star == 0):
+                star_results+=requester.send_result("1", total_distance)
+                star=requester.check_day_success()
+            if (star == 1):
+                star_results+=requester.send_result("2", similarity_score)
+            if (star == 2):
+                star_results={1:"Completed"}
+            return [total_distance, similarity_score, star_results]
+        return [total_distance, similarity_score, star]
+
     except Exception as e:
-        print(f"Wystąpił błąd: {e}")
-        return None
+        return (f"Error: {e}")
