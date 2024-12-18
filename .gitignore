@@ -1,0 +1,38 @@
+# Ignorowanie katalogu __pycache__
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+
+# Ignorowanie plików logów
+*.log
+
+# Ignorowanie plików środowisk wirtualnych
+venv/
+env/
+.venv/
+.env/
+.env
+
+# Ignorowanie plików konfiguracyjnych IDE/edytorów
+.vscode/
+.idea/
+*.iml
+*.swp
+*.sublime*
+
+# Ignorowanie plików tymczasowych
+*.tmp
+*.bak
+*.~*
+
+# Ignorowanie plików testowych
+.coverage
+htmlcov/
+pytest_cache/
+
+# Ignorowanie plików build
+build/
+dist/
+*.egg-info/
