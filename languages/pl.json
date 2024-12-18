@@ -1,0 +1,12 @@
+{
+    "welcome": "Witaj w programie!",
+    "select_language": "Wybierz język:",
+    "select_option": "Wybierz wersję programu:",
+    "console_version": "1. Wersja konsolowa",
+    "gui_version": "2. Wersja graficzna",
+    "enter_number": "Podaj numer:",
+    "invalid_choice": "Nieznany wybór. Zamykam program.",
+    "running_console": "Uruchamianie wersji konsolowej...",
+    "running_gui": "Uruchamianie wersji graficznej..."
+  }
+  

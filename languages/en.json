@@ -1,0 +1,12 @@
+{
+    "welcome": "Welcome to the program!",
+    "select_language": "Choose your language:",
+    "select_option": "Choose a version of the program:",
+    "console_version": "1. Console version",
+    "gui_version": "2. Graphical version",
+    "enter_number": "Enter the number:",
+    "invalid_choice": "Invalid choice. Exiting the program.",
+    "running_console": "Running console version...",
+    "running_gui": "Running graphical version..."
+  }
+  

@@ -1,51 +1,61 @@
-import os
 import subprocess
+import os
 from dotenv import load_dotenv
-from Year2024.functions import DAY_FUNCTIONS  # Import funkcji z jednego pliku
+from utils.language_loader import load_language
 
 # Wczytanie zmiennych z pliku .env
 load_dotenv()
 
-def gen(TOKEN):
-    # Generowanie sesji na podstawie TOKEN
-    print(f"Wygenerowano sesję z TOKEN: {TOKEN}")
-    input_url = "https://adventofcode.com/2024/day/1/input"
-    DAY_FUNCTIONS[1](input_url, TOKEN)  # Wywołanie funkcji dla dnia 1 jako przykład
+def get_language():
+    """
+    Pobiera język z pliku .env lub prosi o wybór i zapisuje do .env
+    """
+    lang_code = os.getenv("LANGUAGE")  # Sprawdzenie, czy istnieje zmienna LANG
 
-def get_session_token():
-    """
-    Funkcja sprawdza czy istnieje ciastkowa sesja w .env.
-    Jeśli nie, prosi o podanie TOKEN-a i zapisuje go do pliku .env.
-    """
-    token = os.getenv("SESSION_TOKEN")
-    if not token:
-        token = input("Podaj TOKEN dla ciastkowej sesji: ")
-        # Zapis TOKEN do pliku .env
+    if not lang_code:
+        print("Wybierz język / Select language:")
+        print("1. Polski (pl)")
+        print("2. English (en)")
+
+        # Prośba o wybór języka
+        choice = input("Podaj numer (1/2): ").strip()
+        lang_code = "pl" if choice == "1" else "en"
+
+        # Zapis wyboru do pliku .env
         with open(".env", "a") as env_file:
-            env_file.write(f"\nSESSION_TOKEN={token}")
-        print("TOKEN zapisany do .env")
-    return token
+            env_file.write(f"\nLANGUAGE={lang_code}")
+        print(f"Język zapisany: {lang_code.upper()}")
+
+    return lang_code
 
 def main():
-    token = get_session_token()  # Pobranie ciastkowej sesji
-    
-    while True:
-        print("\nWybierz dzień (1-25) lub 0 aby zakończyć:")
-        try:
-            day = int(input("Podaj numer dnia: "))
-            if day == 0:
-                print("Koniec programu.")
-                break
-            elif 1 <= day <= 25:
-                if day in DAY_FUNCTIONS:
-                    input_url = f"https://adventofcode.com/2024/day/{day}/input"
-                    DAY_FUNCTIONS[day](input_url, token)  # Wywołanie funkcji dla wybranego dnia
-                else:
-                    print(f"Funkcja dla dnia {day} nie jest zdefiniowana.")
-            else:
-                print("Podaj liczbę z zakresu 1-25.")
-        except ValueError:
-            print("Błąd: Podaj liczbę całkowitą.")
+    # Pobierz język z funkcji
+    lang_code = get_language()
+
+    # Załaduj tłumaczenia na podstawie języka
+    try:
+        lang = load_language(lang_code)
+    except FileNotFoundError as e:
+        print(e)
+        return
+
+    # Główne menu programu
+    print(lang["welcome"])
+    print(lang["select_option"])
+    print(lang["console_version"])
+    print(lang["gui_version"])
+
+    # Prośba o numer
+    choice = input(lang["enter_number"] + " ").strip()
+
+    if choice == "1":
+        print(lang["running_console"])
+        subprocess.run(["python", "console.py"], check=True)
+    elif choice == "2":
+        print(lang["running_gui"])
+        subprocess.run(["python", "gui.py"], check=True)
+    else:
+        print(lang["invalid_choice"])
 
 if __name__ == "__main__":
     main()
