@@ -1,6 +1,6 @@
 from collections import Counter
 from utils.requester import Requester
-import time
+from utils.auto_send import auto_send as Auto
 
 def calculate_distance_from_url(token, auto_send):
     """
@@ -45,18 +45,7 @@ def calculate_distance_from_url(token, auto_send):
         star=requester.check_day_success()
         
         if auto_send:
-            star_results = [0,0]
-            
-            if (star == 0):
-                star_results[0]=requester.send_result("1", total_distance)
-                star=requester.check_day_success()
-                time.sleep(5)
-            if (star == 1):
-                star_results[1]=requester.send_result("2", similarity_score)
-            if (star == 2):
-                star_results[0]={1:"Completed"}
-            return [total_distance, similarity_score, star, star_results]
-        star = requester.check_day_success()
+            return(Auto(requester, total_distance, similarity_score, star))
         return [total_distance, similarity_score, star, False]
 
     except Exception as e:

@@ -1,5 +1,5 @@
 from utils.requester import Requester
-import time
+from utils.auto_send import auto_send as Auto
 
 def is_report_safe(report):
     """
@@ -52,19 +52,7 @@ def calculate_safe_reports(token, auto_send):
         star = requester.check_day_success()
 
         if auto_send:
-            star_results = [0,0]
-            
-            if star == 0:
-                star_results[0] = requester.send_result("1", safe_reports_part1)
-                star = requester.check_day_success()
-                time.sleep(5)
-            if star == 1:
-                star_results[1] = requester.send_result("2", safe_reports_part2)
-            if (star == 2):
-                star_results[0] = {1:"Completed"}
-            star = requester.check_day_success()
-            return [safe_reports_part1, safe_reports_part2, star, star_results]
-
+            return(Auto(requester, safe_reports_part1, safe_reports_part2, star))
         return [safe_reports_part1, safe_reports_part2, star, False]
 
     except Exception as e:
