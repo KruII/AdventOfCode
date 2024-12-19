@@ -8,6 +8,17 @@
     "invalid_choice": "Nieznany wybór. Zamykam program.",
     "running_console": "Uruchamianie wersji konsolowej...",
     "running_gui": "Uruchamianie wersji graficznej...",
-
-    "select_day": "Wybierz dzień (1-25) lub 0 aby zakończyć:"
+    "select_day": "Wybierz dzień (1-25) lub 0 aby zakończyć:",
+    "error": "Błąd:",
+    "answer_on_first_star": "Odpowiedź na pierwszą gwiazdkę:",
+    "answer_on_second_star": "Odpowiedź na drugą gwiazdkę:",
+    "already_completed": "Poziom został już rozwiązany.",
+    "current_stars_count": "Aktualna liczba gwiazdek:",
+    "level": "Poziom:",
+    "sent_successfully": "został wysłany pomyślnie!",
+    "error_in_level": "Błąd w poziomie",
+    "enter_session_token": "Podaj token sesji:",
+    "missing_variable": "Brak zmiennej",
+    "default_value_set": "Ustawiono domyślną wartość:",
+    "enter_day_number": "Podaj numer dnia:"
 }

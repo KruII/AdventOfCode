@@ -8,7 +8,17 @@
     "invalid_choice": "Invalid choice. Exiting the program.",
     "running_console": "Running console version...",
     "running_gui": "Running graphical version...",
-
-    "select_day": ""
-  }
-  
+    "select_day": "Select a day (1-25) or 0 to exit:",
+    "error": "Error:",
+    "answer_on_first_star": "Answer for the first star:",
+    "answer_on_second_star": "Answer for the second star:",
+    "already_completed": "The level has already been completed.",
+    "current_stars_count": "Current star count:",
+    "level": "Level:",
+    "sent_successfully": "was sent successfully!",
+    "error_in_level": "Error in level",
+    "enter_session_token": "Enter session token:",
+    "missing_variable": "Missing variable",
+    "default_value_set": "Default value set:",
+    "enter_day_number": "Enter day number:"
+}
