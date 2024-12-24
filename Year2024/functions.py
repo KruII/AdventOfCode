@@ -6,6 +6,7 @@ from Year2024.Day4.auto import count_xmas_and_x_mas
 from Year2024.Day5.auto import process_updates
 from Year2024.Day6.auto import simulate_guard_patrol
 from Year2024.Day7.auto import calculate_calibration_totals
+from Year2024.Day8.auto import process_grid
 # ... importy dla pozostałych plików
 
 # Słownik mapujący dzień na funkcję
@@ -17,5 +18,6 @@ DAY_FUNCTIONS = {
     5: process_updates,
     6: simulate_guard_patrol,
     7: calculate_calibration_totals,
+    8: process_grid,
     # ... dodawając mapy dla każdego kolejnego działu
 }
