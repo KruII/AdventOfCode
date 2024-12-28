@@ -9,6 +9,7 @@ from Year2024.Day7.auto import calculate_calibration_totals
 from Year2024.Day8.auto import process_grid
 from Year2024.Day9.auto import solve_day_09
 from Year2024.Day10.auto import day_10
+from Year2024.Day11.auto import Day_11
 # ... importy dla pozostałych plików
 
 # Słownik mapujący dzień na funkcję
@@ -23,6 +24,7 @@ DAY_FUNCTIONS = {
     8: process_grid,
     9: solve_day_09,
     10: day_10,
+    11: Day_11,
 
     # ... dodawając mapy dla każdego kolejnego działu
 }
