@@ -13,6 +13,7 @@ from Year2024.Day11.auto import Day_11
 from Year2024.Day12.auto import Day_12
 from Year2024.Day13.auto import Day_13
 from Year2024.Day14.auto import Day_14
+from Year2024.Day15.auto import Day_15
 # ... importy dla pozostałych plików
 
 # Słownik mapujący dzień na funkcję
@@ -31,6 +32,7 @@ DAY_FUNCTIONS = {
     12: Day_12,
     13: Day_13,
     14: Day_14,
+    15: Day_15,
 
     # ... dodawając mapy dla każdego kolejnego działu
 }
